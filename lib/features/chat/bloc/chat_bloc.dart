@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/usecases/usecases.dart';
@@ -9,6 +10,7 @@ import '../../../domain/repositories/repositories.dart';
 part 'chat_event.dart';
 part 'chat_state.dart';
 
+@injectable
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final SendMessageUseCase sendMessage;
   final SaveMessageUseCase saveMessage;

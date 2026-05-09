@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/errors/app_constants.dart';
 import '../../../data/datasources/ollama_api_client.dart';
@@ -8,6 +9,7 @@ import '../../../data/datasources/ollama_api_client.dart';
 part 'settings_event.dart';
 part 'settings_state.dart';
 
+@singleton
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SharedPreferences prefs;
   final OllamaApiClient apiClient;

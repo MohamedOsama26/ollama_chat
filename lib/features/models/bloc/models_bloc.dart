@@ -1,11 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/usecases/usecases.dart';
 
 part 'models_event.dart';
 part 'models_state.dart';
 
+@injectable
 class ModelsBloc extends Bloc<ModelsEvent, ModelsState> {
   final ListModelsUseCase listModels;
   ModelsBloc({required this.listModels}) : super(const ModelsState()) {

@@ -18,8 +18,10 @@ class AppRouter {
           ),
           GoRoute(
             path: '/chat/:sessionId',
-            builder: (context, state) =>
-                ChatPage(sessionId: state.pathParameters['sessionId']!),
+            builder: (context, state) => ChatPage(
+              sessionId: state.pathParameters['sessionId']!,
+              initialMessage: state.extra as String?,
+            ),
           ),
           GoRoute(
             path: '/models',

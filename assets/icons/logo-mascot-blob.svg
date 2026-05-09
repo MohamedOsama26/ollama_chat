@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="mbGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBBF24"></stop>
+      <stop offset="100%" stop-color="#EA580C"></stop>
+    </linearGradient>
+    <radialGradient id="mbCheek" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FCA5A5" stop-opacity="0.7"></stop>
+      <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <path d="M14 30c0-10 8-18 18-18s18 8 18 18v8c0 8-6 14-14 14h-1l-7 6v-6h-1c-7 0-13-6-13-14v-8z" fill="url(#mbGrad)"></path>
+  <path d="M22 18c-3 2-5 5-6 9" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5" fill="none"></path>
+  <ellipse cx="22" cy="36" rx="5" ry="4" fill="url(#mbCheek)"></ellipse>
+  <ellipse cx="42" cy="36" rx="5" ry="4" fill="url(#mbCheek)"></ellipse>
+  <circle cx="24" cy="32" r="3" fill="#1C1917"></circle>
+  <circle cx="40" cy="32" r="3" fill="#1C1917"></circle>
+  <circle cx="25" cy="31" r="1" fill="#FFFFFF"></circle>
+  <circle cx="41" cy="31" r="1" fill="#FFFFFF"></circle>
+  <path d="M28 42c2 1.5 4 2 6 2s4-0.5 6-2" stroke="#1C1917" stroke-width="2" stroke-linecap="round" fill="none"></path>
+  <path d="M8 26c2-2 4-3 6-2M56 26c-2-2-4-3-6-2" stroke="#EA580C" stroke-width="2.5" stroke-linecap="round" fill="none"></path>
+</svg>

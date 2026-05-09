@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 import '../../../domain/entities/entities.dart';
 import '../../../domain/usecases/usecases.dart';
@@ -7,6 +8,7 @@ import '../../../domain/usecases/usecases.dart';
 part 'sessions_event.dart';
 part 'sessions_state.dart';
 
+@injectable
 class SessionsBloc extends Bloc<SessionsEvent, SessionsState> {
   final GetSessionsUseCase getSessions;
   final CreateSessionUseCase createSession;
