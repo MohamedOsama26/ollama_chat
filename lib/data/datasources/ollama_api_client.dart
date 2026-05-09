@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:ollama_chat/core/enum/model_status.dart';
 import '../../domain/entities/entities.dart';
 import '../../core/errors/app_constants.dart';
 
@@ -28,6 +29,24 @@ class OllamaApiClient {
       return response.statusCode == 200;
     } catch (_) {
       return false;
+    }
+  }
+
+  Future<ModelStatus> getModelStatus(String modelName) async {
+    try {
+      final response = await _dio.get('/models/$modelName/status');
+      
+      final status = response.data['status'] as String? ?? 'error';
+      switch (status.toLowerCase()) {
+        case 'ready':
+          return ModelStatus.Ready;
+        case 'loading':
+          return ModelStatus.Loading;
+        default:
+          return ModelStatus.Error;
+      }
+    } catch (_) {
+      return ModelStatus.Error;
     }
   }
 

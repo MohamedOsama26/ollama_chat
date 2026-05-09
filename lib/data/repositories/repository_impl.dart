@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import '../../domain/entities/entities.dart';
 import '../../domain/repositories/repositories.dart';
 import '../../core/errors/failures.dart';
 import '../datasources/ollama_api_client.dart';
 import '../datasources/local_datasource.dart';
 
+@Singleton(as: ChatRepository)
 class ChatRepositoryImpl implements ChatRepository {
   final OllamaApiClient apiClient;
   ChatRepositoryImpl(this.apiClient);
@@ -29,6 +31,7 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 }
 
+@Singleton(as: SessionRepository)
 class SessionRepositoryImpl implements SessionRepository {
   final LocalDatasource localDatasource;
   SessionRepositoryImpl(this.localDatasource);
@@ -102,6 +105,7 @@ class SessionRepositoryImpl implements SessionRepository {
   }
 }
 
+@Singleton(as: ModelRepository)
 class ModelRepositoryImpl implements ModelRepository {
   final OllamaApiClient apiClient;
   ModelRepositoryImpl(this.apiClient);

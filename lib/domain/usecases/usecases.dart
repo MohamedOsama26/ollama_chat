@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import '../entities/entities.dart';
 import '../repositories/repositories.dart';
 import '../../core/errors/failures.dart';
 
+@injectable
 class SendMessageUseCase {
   final ChatRepository repository;
   SendMessageUseCase(this.repository);
@@ -19,6 +21,7 @@ class SendMessageUseCase {
       );
 }
 
+@injectable
 class GetSessionsUseCase {
   final SessionRepository repository;
   GetSessionsUseCase(this.repository);
@@ -26,6 +29,7 @@ class GetSessionsUseCase {
   Future<Either<Failure, List<ChatSession>>> call() => repository.getSessions();
 }
 
+@injectable
 class CreateSessionUseCase {
   final SessionRepository repository;
   CreateSessionUseCase(this.repository);
@@ -34,6 +38,7 @@ class CreateSessionUseCase {
       repository.createSession(session);
 }
 
+@injectable
 class DeleteSessionUseCase {
   final SessionRepository repository;
   DeleteSessionUseCase(this.repository);
@@ -42,6 +47,7 @@ class DeleteSessionUseCase {
       repository.deleteSession(sessionId);
 }
 
+@injectable
 class GetMessagesUseCase {
   final SessionRepository repository;
   GetMessagesUseCase(this.repository);
@@ -50,6 +56,7 @@ class GetMessagesUseCase {
       repository.getMessages(sessionId);
 }
 
+@injectable
 class SaveMessageUseCase {
   final SessionRepository repository;
   SaveMessageUseCase(this.repository);
@@ -58,6 +65,7 @@ class SaveMessageUseCase {
       repository.saveMessage(message);
 }
 
+@injectable
 class ListModelsUseCase {
   final ModelRepository repository;
   ListModelsUseCase(this.repository);
