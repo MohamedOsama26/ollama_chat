@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await setupDependencies();
+  await configureDependencies();
   runApp(const OllamaChatApp());
 }
 
