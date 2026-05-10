@@ -7,7 +7,8 @@ class HomeInputBar extends StatefulWidget {
   final void Function(String) onSend;
   final void Function(String) onChipTap;
 
-  const HomeInputBar({super.key, 
+  const HomeInputBar({
+    super.key,
     required this.controller,
     required this.chips,
     required this.onSend,
@@ -19,6 +20,21 @@ class HomeInputBar extends StatefulWidget {
 }
 
 class _HomeInputBarState extends State<HomeInputBar> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() => setState(() {});
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_onTextChanged);
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,8 +60,7 @@ class _HomeInputBarState extends State<HomeInputBar> {
                   onPressed: () => widget.onChipTap(widget.chips[i]),
                   backgroundColor: AppTheme.surfaceDark,
                   side: const BorderSide(color: Color(0xFF3B3531)),
-                  labelStyle:
-                      const TextStyle(color: Color(0xFFD6D3D1)),
+                  labelStyle: const TextStyle(color: Color(0xFFD6D3D1)),
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                 ),
               ),
@@ -56,8 +71,7 @@ class _HomeInputBarState extends State<HomeInputBar> {
                 decoration: BoxDecoration(
                   color: AppTheme.surfaceDark,
                   borderRadius: BorderRadius.circular(28),
-                  border:
-                      Border.all(color: const Color(0xFF3B3531)),
+                  border: Border.all(color: const Color(0xFF3B3531)),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -80,23 +94,43 @@ class _HomeInputBarState extends State<HomeInputBar> {
                         },
                         decoration: const InputDecoration(
                           hintText: 'Ask anything...',
-                          hintStyle: TextStyle(
-                              color: Color(0xFF57534E), fontSize: 14),
+                          hintStyle:
+                              TextStyle(color: Color(0xFF57534E), fontSize: 14),
                           border: InputBorder.none,
                           filled: false,
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 4),
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 12, horizontal: 4),
                         ),
-                        style: const TextStyle(
-                            color: Colors.white, fontSize: 14),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.mic_none_rounded, size: 20),
-                      color: const Color(0xFF78716C),
-                      onPressed: () {},
-                      padding: const EdgeInsets.fromLTRB(4, 12, 12, 12),
-                      constraints: const BoxConstraints(),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: widget.controller.text.isEmpty
+                            ? const Color(0xFF78716C)
+                            : const Color.fromARGB(52, 234, 90, 12),
+                      ),
+                      margin: const EdgeInsets.all(5),
+                      child: IconButton(
+                        icon: widget.controller.text.isEmpty
+                            ? const Icon(Icons.mic_none_rounded, size: 20)
+                            : const Icon(Icons.send_rounded, size: 20),
+                        color: widget.controller.text.isEmpty
+                            ? const Color(0xFF78716C)
+                            : AppTheme.primary,
+                        onPressed: widget.controller.text.isEmpty
+                            ? null
+                            : () {
+                                widget.onSend(widget.controller.text);
+                                widget.controller.clear();
+                              },
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints.expand(),
+                      ),
                     ),
                   ],
                 ),
@@ -108,4 +142,3 @@ class _HomeInputBarState extends State<HomeInputBar> {
     );
   }
 }
-

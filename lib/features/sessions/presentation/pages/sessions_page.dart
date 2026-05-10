@@ -64,6 +64,7 @@ class _SessionsPageState extends State<SessionsPage>
   }
 
   void _startChat(BuildContext context, String message, {bool autoSend = false}) {
+    print('Starting chat with message: $message, autoSend: $autoSend');
     if (message.trim().isEmpty) return;
     FocusManager.instance.primaryFocus?.unfocus();
     _controller.clear();

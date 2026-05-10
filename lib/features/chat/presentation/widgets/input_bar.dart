@@ -22,7 +22,10 @@ class _InputBarState extends State<InputBar> {
     super.initState();
     _ownsController = widget.controller == null;
     _controller = widget.controller ?? TextEditingController();
+    _controller.addListener(_onTextChanged);
   }
+
+  void _onTextChanged() => setState(() {});
 
   static const _chips = [
     'Summarize this',
@@ -145,10 +148,13 @@ class _InputBarState extends State<InputBar> {
                           )
                         else
                           IconButton(
-                            icon:
-                                const Icon(Icons.mic_none_rounded, size: 20),
-                            color: const Color(0xFF78716C),
-                            onPressed: () {},
+                            icon: _controller.text.isEmpty
+                                ? const Icon(Icons.mic_none_rounded, size: 20)
+                                : const Icon(Icons.send_rounded, size: 20),
+                            color: _controller.text.isEmpty
+                                ? const Color(0xFF78716C)
+                                : AppTheme.primary,
+                            onPressed: _controller.text.isEmpty ? null : _send,
                             padding:
                                 const EdgeInsets.fromLTRB(4, 12, 12, 12),
                             constraints: const BoxConstraints(),
@@ -167,6 +173,7 @@ class _InputBarState extends State<InputBar> {
 
   @override
   void dispose() {
+    _controller.removeListener(_onTextChanged);
     if (_ownsController) _controller.dispose();
     _focusNode.dispose();
     super.dispose();
