@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../di/injection.dart';
 import '../errors/app_constants.dart';
-import '../../features/sessions/bloc/sessions_bloc.dart';
-import '../../features/sessions/widgets/sessions_sidebar.dart';
+import '../../features/sessions/presentation/bloc/sessions_bloc.dart';
+import '../../features/sessions/presentation/widgets/sessions_sidebar.dart';
 
 class MainShell extends StatelessWidget {
   final Widget child;

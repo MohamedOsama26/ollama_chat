@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
-import '../../features/chat/pages/chat_page.dart';
-import '../../features/sessions/pages/sessions_page.dart';
-import '../../features/settings/pages/settings_page.dart';
-import '../../features/models/pages/model_picker_page.dart';
+import '../../features/chat/presentation/pages/chat_page.dart';
+import '../../features/sessions/presentation/pages/sessions_page.dart';
+import '../../features/settings/presentation/pages/settings_page.dart';
+import '../../features/models/presentation/pages/model_picker_page.dart';
 import '../shell/main_shell.dart';
 
 class AppRouter {
@@ -18,10 +18,15 @@ class AppRouter {
           ),
           GoRoute(
             path: '/chat/:sessionId',
-            builder: (context, state) => ChatPage(
-              sessionId: state.pathParameters['sessionId']!,
-              initialMessage: state.extra as String?,
-            ),
+            builder: (context, state) {
+              final args =
+                  state.extra as ({String message, bool autoSend})?;
+              return ChatPage(
+                sessionId: state.pathParameters['sessionId']!,
+                initialMessage: args?.message,
+                autoSend: args?.autoSend ?? false,
+              );
+            },
           ),
           GoRoute(
             path: '/models',

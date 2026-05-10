@@ -3,12 +3,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/di/injection.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
-import 'features/settings/bloc/settings_bloc.dart';
+import 'features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  await Hive.openBox<Map>('sessions');
   await configureDependencies();
   runApp(const OllamaChatApp());
 }
