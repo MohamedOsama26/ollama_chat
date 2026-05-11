@@ -1,10 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ollama_chat/core/widgets/chat_avatar.dart';
 import 'package:ollama_chat/features/sessions/presentation/widgets/greeting.dart';
-import 'package:ollama_chat/features/sessions/presentation/widgets/home_input_bar.dart';
+import 'package:ollama_chat/core/widgets/input_bar.dart';
 import 'package:ollama_chat/features/sessions/presentation/widgets/model_badge.dart';
 import 'package:ollama_chat/features/sessions/presentation/widgets/suggestion_card.dart';
 import 'package:ollama_chat/features/sessions/presentation/widgets/theme_toggle.dart';
@@ -63,8 +62,7 @@ class _SessionsPageState extends State<SessionsPage>
     super.dispose();
   }
 
-  void _startChat(BuildContext context, String message, {bool autoSend = false}) {
-    print('Starting chat with message: $message, autoSend: $autoSend');
+  void _startChat(BuildContext context, String message) {
     if (message.trim().isEmpty) return;
     FocusManager.instance.primaryFocus?.unfocus();
     _controller.clear();
@@ -79,7 +77,7 @@ class _SessionsPageState extends State<SessionsPage>
       if (sessions.isNotEmpty) {
         router.go(
           '/chat/${sessions.first.id}',
-          extra: (message: msg, autoSend: autoSend),
+          extra: (message: msg, autoSend: true),
         );
       }
     });
@@ -127,8 +125,7 @@ class _SessionsPageState extends State<SessionsPage>
                               iconColor: s.color,
                               title: s.title,
                               subtitle: s.sub,
-                              onTap: () =>
-                                  _startChat(context, s.title, autoSend: true),
+                              onTap: () => _startChat(context, s.title),
                             )),
                         const SizedBox(height: 24),
                       ],
@@ -138,7 +135,7 @@ class _SessionsPageState extends State<SessionsPage>
               ),
             ),
           ),
-          HomeInputBar(
+          InputBar(
             controller: _controller,
             chips: _chips,
             onSend: (msg) => _startChat(context, msg),

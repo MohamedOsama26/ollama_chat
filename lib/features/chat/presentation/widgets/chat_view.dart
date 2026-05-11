@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ollama_chat/core/theme/app_theme.dart';
 import 'package:ollama_chat/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:ollama_chat/features/chat/presentation/widgets/empty_chat.dart';
-import 'package:ollama_chat/features/chat/presentation/widgets/input_bar.dart';
+import 'package:ollama_chat/core/widgets/input_bar.dart';
 import 'package:ollama_chat/features/chat/presentation/widgets/message_bubble.dart';
 import 'package:ollama_chat/features/sessions/presentation/widgets/model_badge.dart';
 import 'package:ollama_chat/features/sessions/presentation/widgets/theme_toggle.dart';
@@ -121,7 +121,16 @@ class _ChatViewState extends State<ChatView> {
                 },
               ),
             ),
-            InputBar(controller: _inputController),
+            BlocBuilder<ChatBloc, ChatState>(
+              builder: (context, state) => InputBar(
+                controller: _inputController,
+                onSend: (msg) =>
+                    context.read<ChatBloc>().add(SendChatMessage(msg)),
+                isStreaming: state.isStreaming,
+                onStop: () =>
+                    context.read<ChatBloc>().add(CancelStreaming()),
+              ),
+            ),
           ],
         ),
       ),
