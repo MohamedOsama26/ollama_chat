@@ -21,6 +21,14 @@ class SetSession extends ChatEvent {
   List<Object?> get props => [session];
 }
 
+class InitChat extends ChatEvent {
+  final ChatSession session;
+  final String? autoSendMessage;
+  const InitChat(this.session, {this.autoSendMessage});
+  @override
+  List<Object?> get props => [session, autoSendMessage];
+}
+
 class SendChatMessage extends ChatEvent {
   final String content;
   const SendChatMessage(this.content);

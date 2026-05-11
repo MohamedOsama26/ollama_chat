@@ -25,6 +25,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     required this.getMessages,
     required this.updateSession,
   }) : super(const ChatState()) {
+    on<InitChat>(_onInitChat);
     on<LoadMessages>(_onLoadMessages);
     on<SendChatMessage>(_onSendMessage);
     on<AppendToken>(_onAppendToken);
@@ -32,6 +33,19 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<StreamingError>(_onStreamingError);
     on<CancelStreaming>(_onCancelStreaming);
     on<SetSession>(_onSetSession);
+  }
+
+  Future<void> _onInitChat(InitChat event, Emitter<ChatState> emit) async {
+    emit(state.copyWith(session: event.session, isLoading: true, messages: const []));
+    final result = await getMessages(event.session.id);
+    result.fold(
+      (f) => emit(state.copyWith(isLoading: false, error: f.message)),
+      (msgs) => emit(state.copyWith(isLoading: false, messages: msgs)),
+    );
+    final msg = event.autoSendMessage;
+    if (msg != null && msg.isNotEmpty) {
+      add(SendChatMessage(msg));
+    }
   }
 
   Future<void> _onLoadMessages(LoadMessages event, Emitter<ChatState> emit) async {
@@ -48,11 +62,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   Future<void> _onSendMessage(SendChatMessage event, Emitter<ChatState> emit) async {
-    print('----------------------------');
-    print('Sending message: ${event.content}' ' in session: ${state.session?.id}');
-    print(state);
-    print(state.session);
-    print('----------------------------');
     final session = state.session;
     if (session == null) return;
 

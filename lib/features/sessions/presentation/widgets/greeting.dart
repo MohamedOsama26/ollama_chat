@@ -15,7 +15,7 @@ class Greeting extends StatelessWidget {
                 text: 'Hey there, ',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
               TextSpan(
@@ -32,7 +32,7 @@ class Greeting extends StatelessWidget {
         Text(
           "What's on your mind today?",
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: const Color(0xFF78716C),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
         ),
       ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ollama_chat/core/theme/app_theme.dart';
 
 class SuggestionCard extends StatelessWidget {
   final IconData icon;
@@ -8,7 +7,8 @@ class SuggestionCard extends StatelessWidget {
   final String subtitle;
   final VoidCallback onTap;
 
-  const SuggestionCard({super.key, 
+  const SuggestionCard({
+    super.key,
     required this.icon,
     required this.iconColor,
     required this.title,
@@ -18,6 +18,7 @@ class SuggestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: InkWell(
@@ -26,9 +27,9 @@ class SuggestionCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
-            color: AppTheme.surfaceDark,
+            color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFF3B3531), width: 1),
+            border: Border.all(color: colorScheme.outlineVariant, width: 1),
           ),
           child: Row(
             children: [
@@ -47,19 +48,19 @@ class SuggestionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white)),
+                            color: colorScheme.onSurface)),
                     const SizedBox(height: 2),
                     Text(subtitle,
-                        style: const TextStyle(
-                            fontSize: 12, color: Color(0xFF78716C))),
+                        style: TextStyle(
+                            fontSize: 12, color: colorScheme.onSurfaceVariant)),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right,
-                  color: Color(0xFF57534E), size: 20),
+              Icon(Icons.chevron_right,
+                  color: colorScheme.onSurfaceVariant, size: 20),
             ],
           ),
         ),
@@ -67,4 +68,3 @@ class SuggestionCard extends StatelessWidget {
     );
   }
 }
-

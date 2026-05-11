@@ -59,11 +59,13 @@ class _InputBarState extends State<InputBar> {
   Widget build(BuildContext context) {
     final isEmpty = _controller.text.isEmpty;
     final showChips = widget.chips.isNotEmpty && !widget.isStreaming;
+    final colorScheme = Theme.of(context).colorScheme;
+    final scaffoldBg = Theme.of(context).scaffoldBackgroundColor;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppTheme.bgDark,
-        border: Border(top: BorderSide(color: Color(0xFF292524))),
+      decoration: BoxDecoration(
+        color: scaffoldBg,
+        border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
       ),
       child: SafeArea(
         top: false,
@@ -83,9 +85,9 @@ class _InputBarState extends State<InputBar> {
                         style: const TextStyle(fontSize: 12)),
                     onPressed: () =>
                         (widget.onChipTap ?? widget.onSend)(widget.chips[i]),
-                    backgroundColor: AppTheme.surfaceDark,
-                    side: const BorderSide(color: Color(0xFF3B3531)),
-                    labelStyle: const TextStyle(color: Color(0xFFD6D3D1)),
+                    backgroundColor: colorScheme.surfaceContainerHighest,
+                    side: BorderSide(color: colorScheme.outlineVariant),
+                    labelStyle: TextStyle(color: colorScheme.onSurface),
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                   ),
                 ),
@@ -94,16 +96,16 @@ class _InputBarState extends State<InputBar> {
               padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppTheme.surfaceDark,
+                  color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(28),
-                  border: Border.all(color: const Color(0xFF3B3531)),
+                  border: Border.all(color: colorScheme.outlineVariant),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     IconButton(
                       icon: const Icon(Icons.add, size: 20),
-                      color: const Color(0xFF78716C),
+                      color: colorScheme.onSurfaceVariant,
                       onPressed: widget.isStreaming ? null : () {},
                       padding: const EdgeInsets.fromLTRB(12, 12, 4, 12),
                       constraints: const BoxConstraints(),
@@ -129,22 +131,23 @@ class _InputBarState extends State<InputBar> {
                             hintText: widget.isStreaming
                                 ? 'Generating...'
                                 : 'Ask anything...',
-                            hintStyle: const TextStyle(
-                                color: Color(0xFF57534E), fontSize: 14),
+                            hintStyle: TextStyle(
+                                color: colorScheme.onSurfaceVariant,
+                                fontSize: 14),
                             border: InputBorder.none,
                             filled: false,
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 4),
                           ),
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                              color: colorScheme.onSurface, fontSize: 14),
                         ),
                       ),
                     ),
                     if (widget.isStreaming)
                       IconButton(
                         icon: const Icon(Icons.stop_circle_outlined, size: 22),
-                        color: const Color(0xFFF87171),
+                        color: colorScheme.error,
                         onPressed: widget.onStop,
                         padding: const EdgeInsets.fromLTRB(4, 12, 12, 12),
                         constraints: const BoxConstraints(),
@@ -158,14 +161,14 @@ class _InputBarState extends State<InputBar> {
                           shape: BoxShape.circle,
                           color: isEmpty
                               ? Colors.transparent
-                              : const Color.fromARGB(52, 234, 90, 12),
+                              : AppTheme.primary.withValues(alpha: 0.15),
                         ),
                         child: IconButton(
                           icon: isEmpty
                               ? const Icon(Icons.mic_none_rounded, size: 20)
                               : const Icon(Icons.send_rounded, size: 20),
                           color: isEmpty
-                              ? const Color(0xFF78716C)
+                              ? colorScheme.onSurfaceVariant
                               : AppTheme.primary,
                           onPressed: isEmpty ? null : _send,
                           padding: EdgeInsets.zero,

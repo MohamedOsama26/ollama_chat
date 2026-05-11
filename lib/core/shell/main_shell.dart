@@ -55,7 +55,6 @@ class _MobileLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
-        backgroundColor: Color(0xFF171512),
         child: SessionsSidebar(),
       ),
       body: child,

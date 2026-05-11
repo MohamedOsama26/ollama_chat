@@ -27,12 +27,14 @@ class ChatPage extends StatelessWidget {
             .firstOrNull;
         final bloc = getIt<ChatBloc>();
         if (session != null) {
-          bloc.add(SetSession(session));
-          bloc.add(LoadMessages(sessionId));
+          bloc.add(InitChat(
+            session,
+            autoSendMessage: autoSend ? initialMessage : null,
+          ));
         }
         return bloc;
       },
-      child: ChatView(initialMessage: initialMessage, autoSend: autoSend),
+      child: ChatView(initialMessage: autoSend ? null : initialMessage),
     );
   }
 }

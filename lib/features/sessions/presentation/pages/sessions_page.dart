@@ -70,17 +70,20 @@ class _SessionsPageState extends State<SessionsPage>
     final model = context.read<SettingsBloc>().state.defaultModel;
     final sessionsBloc = context.read<SessionsBloc>();
     final router = GoRouter.of(context);
+    final prevCount = sessionsBloc.state.sessions.length;
     sessionsBloc.add(CreateSession(model: model));
-    Future.delayed(const Duration(milliseconds: 120), () {
-      if (!mounted) return;
-      final sessions = sessionsBloc.state.sessions;
-      if (sessions.isNotEmpty) {
-        router.go(
-          '/chat/${sessions.first.id}',
-          extra: (message: msg, autoSend: true),
-        );
-      }
-    });
+    sessionsBloc.stream
+        .where((s) => s.sessions.length > prevCount)
+        .first
+        .timeout(const Duration(seconds: 5))
+        .then((state) {
+          if (!mounted) return;
+          router.go(
+            '/chat/${state.sessions.first.id}',
+            extra: (message: msg, autoSend: true),
+          );
+        })
+        .catchError((_) {});
   }
 
   @override

@@ -5,7 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:ollama_chat/core/utils/app_assets.dart';
 
 class ChatAvatar extends StatefulWidget {
-  const ChatAvatar({super.key});
+  final double size;
+  const ChatAvatar({super.key, this.size = 100});
 
   @override
   State<ChatAvatar> createState() => _ChatAvatarState();
@@ -56,8 +57,8 @@ class _ChatAvatarState extends State<ChatAvatar> with TickerProviderStateMixin {
           child: child,
         ),
         child: SizedBox(
-          width: 100,
-          height: 100,
+          width: widget.size,
+          height: widget.size,
           child: SvgPicture.asset(AppAssets.logoMascotBlob),
         ),
       ),

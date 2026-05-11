@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ollama_chat/core/domain/entities/entities.dart';
+import 'package:ollama_chat/core/theme/app_theme.dart';
+import 'package:ollama_chat/core/utils/app_assets.dart';
 
 class MessageBubble extends StatelessWidget {
   final ChatMessage message;
@@ -21,11 +24,19 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isUser) ...[
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: colorScheme.primaryContainer,
-              child: Icon(Icons.smart_toy_outlined,
-                  size: 16, color: colorScheme.onPrimaryContainer),
+            Container(
+              width: 32,
+              height: 32,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [AppTheme.primary, AppTheme.amber],
+                ),
+              ),
+              padding: const EdgeInsets.all(6),
+              child: SvgPicture.asset(AppAssets.logoMascotBlob),
             ),
             const SizedBox(width: 8),
           ],
