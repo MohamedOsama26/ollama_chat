@@ -2,13 +2,22 @@
 
 A beautiful, open-source Flutter chat client for [Ollama](https://ollama.ai) — privacy-first, fully offline, cross-platform.
 
-> First Flutter Ollama client with native **Egyptian Arabic dialect** support and RTL layout.
 
 ---
 
 ## Screenshots
 
-<!-- Add screenshots here after first run -->
+### Mobile (Android)
+<img src="screenshots/mobile.png" alt="Mobile screenshots" width="100%"/>
+
+### Desktop — Home & Chat (Dark)
+<p float="left">
+  <img src="screenshots/desktop-home.png" alt="Desktop home" width="49%"/>
+  <img src="screenshots/desktop-chat-dark.png" alt="Desktop chat dark" width="49%"/>
+</p>
+
+### Desktop — Chat (Light)
+<img src="screenshots/desktop-chat-light.png" alt="Desktop chat light" width="100%"/>
 
 ---
 
@@ -20,7 +29,6 @@ A beautiful, open-source Flutter chat client for [Ollama](https://ollama.ai) —
 - **Markdown rendering** — code blocks, bold, lists, headers
 - **Persistent history** — sessions survive app restarts (Hive)
 - **Settings** — custom Ollama host URL, theme, language
-- **Egyptian Arabic support** — RTL layout, dialect system prompt
 - **Responsive layout** — sidebar on desktop, drawer on mobile
 
 ## Platforms
