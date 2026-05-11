@@ -48,6 +48,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   Future<void> _onSendMessage(SendChatMessage event, Emitter<ChatState> emit) async {
+    print('----------------------------');
+    print('Sending message: ${event.content}' ' in session: ${state.session?.id}');
+    print(state);
+    print(state.session);
+    print('----------------------------');
     final session = state.session;
     if (session == null) return;
 

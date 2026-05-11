@@ -19,14 +19,22 @@ class ChatRepositoryImpl implements ChatRepository {
     String? systemPrompt,
   }) async* {
     try {
+      print('Repository: Sending message to API client...');
+      print('Repository: Messages: $messages');
+      print('Repository: System Prompt: $systemPrompt');
+      print('Repository: Model: $model');
+      print('Repository: Starting to stream response tokens...');
       await for (final token in apiClient.chat(
         model: model,
         messages: messages,
         systemPrompt: systemPrompt,
       )) {
+        print('Received token: $token');
         yield Right(token);
       }
     } on Exception catch (e) {
+      print('Repository: Error occurred: $e');
+      print('************************************');
       yield Left(NetworkFailure(e.toString()));
     }
   }

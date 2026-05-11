@@ -71,11 +71,13 @@ class OllamaApiClient {
     if (systemPrompt != null && systemPrompt.isNotEmpty) {
       messageList.add({'role': 'system', 'content': systemPrompt});
     }
+
     messageList.addAll(
       messages.where((m) => m.role != 'system').map((m) => m.toOllamaJson()),
     );
 
-    final response = await _dio.post(
+    print('API Client: Sending request...');
+    final Response response = await _dio.post(
       AppConstants.apiChat,
       data: {'model': model, 'messages': messageList, 'stream': true},
       options: Options(responseType: ResponseType.stream),
@@ -97,7 +99,10 @@ class OllamaApiClient {
           final done = json['done'] as bool? ?? false;
           if (content != null && content.isNotEmpty) yield content;
           if (done) return;
-        } catch (_) {}
+        } catch (error) {
+          print(' - API Client: Error parsing line: $error');
+          print(' - API Client: Line content: $line');
+        }
       }
     }
   }

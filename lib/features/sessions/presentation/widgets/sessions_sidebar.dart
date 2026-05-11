@@ -158,7 +158,7 @@ class _SearchBar extends StatelessWidget {
 }
 
 class _SessionList extends StatelessWidget {
-  _SessionList();
+  const _SessionList();
 
   @override
   Widget build(BuildContext context) {
@@ -374,10 +374,10 @@ class _SidebarFooter extends StatelessWidget {
                   size: 18, color: Color(0xFF78716C)),
             ),
             const SizedBox(width: 10),
-            Expanded(
+            const Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text('You',
                       style: TextStyle(
                           fontSize: 13,

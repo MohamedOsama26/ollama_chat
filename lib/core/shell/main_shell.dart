@@ -36,9 +36,9 @@ class _DesktopLayout extends StatelessWidget {
     return Scaffold(
       body: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             width: AppConstants.sidebarWidth,
-            child: const SessionsSidebar(),
+            child: SessionsSidebar(),
           ),
           Expanded(child: child),
         ],

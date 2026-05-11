@@ -1,7 +1,7 @@
 class AppConstants {
   // Ollama API
   static const String defaultOllamaHost = 'http://localhost:11434';
-  static const String defaultModel = 'llama3';
+  static const String defaultModel = 'llama3.2:3b';
   static const String apiChat = '/api/chat';
   static const String apiTags = '/api/tags';
 
